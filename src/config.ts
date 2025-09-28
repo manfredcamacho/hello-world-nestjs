@@ -9,6 +9,6 @@ export default () => ({
       key: process.env.NEWS_API_KEY,
     },
     cache: {
-      ttl: Number(process.env.CACHE_TTL) || 60,
+      ttl: Number(process.env.CACHE_TTL),
     },
   });
