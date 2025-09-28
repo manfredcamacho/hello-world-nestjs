@@ -11,7 +11,6 @@ export class NewsService {
         private readonly configService: ConfigService
     ) {
         this.apiKey = this.configService.get<string>('newsApi.key');
-        console.log(`apiKey: ${this.apiKey}`);
     }
 
     async getTopHeadlines() {

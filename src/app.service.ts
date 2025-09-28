@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -9,7 +9,14 @@ export class AppService {
   }
 
   async getPokemonByName(name: string) {
-    const {data} = await firstValueFrom( await this.httpService.get(`https://pokeapi.co/api/v2/pokemon/${name}`));
-    return data;
+    try {
+      const {data} = await firstValueFrom(this.httpService.get(`https://pokeapi.co/api/v2/pokemon/${name}`));
+      return data;
+    } catch (error) {
+      if (error.response?.status === 404) {
+        throw new NotFoundException(`Pokemon ${name} not found`);
+      }
+      throw new Error(`Error fetching pokemon: ${error.message}`);
+    }
   }
 }

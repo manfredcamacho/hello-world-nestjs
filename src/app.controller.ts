@@ -1,12 +1,17 @@
 import { Controller, Get, Param} from '@nestjs/common';
 import { AppService } from './app.service';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Pokemon')
 @Controller('api')
 export class AppController {
   constructor(private readonly appService: AppService) {
   }
 
   @Get('pokemon/:name')
+  @ApiResponse({ status: 200, description: 'Pokemon found' })
+  @ApiResponse({ status: 404, description: 'Pokemon not found' })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   getPokemon(@Param('name') name: string) {
     return this.appService.getPokemonByName(name);
   }

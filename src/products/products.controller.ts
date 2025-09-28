@@ -12,12 +12,16 @@ import { ProductsService } from './products.service';
 import { Product } from './interfaces/product';
 import { CreateProductDto } from './dto/create-product';
 import { UpdateProductDto } from './dto/update-product';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
+  @ApiResponse({ status: 200, description: 'Products found' })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   findAll(): Promise<Product[]> {
     return this.productsService.findAll();
   }
