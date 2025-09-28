@@ -128,26 +128,11 @@ La aplicación estará disponible en `http://localhost:3000`
 Una vez que la aplicación esté ejecutándose, puedes acceder a la documentación interactiva de Swagger en:
 
 ```
-http://localhost:3000/api
+http://localhost:3000/api/docs
 ```
 
 La documentación incluye todos los endpoints disponibles, esquemas de datos y ejemplos de uso.
 
-## 🧪 Testing
-
-```bash
-# Tests unitarios
-npm run test
-
-# Tests en modo watch
-npm run test:watch
-
-# Tests e2e
-npm run test:e2e
-
-# Cobertura de tests
-npm run test:cov
-```
 
 ## 🔧 Scripts Disponibles
 
@@ -164,10 +149,6 @@ npm run start:prod         # Ejecutar versión compilada
 npm run lint               # Ejecutar ESLint
 npm run format             # Formatear código con Prettier
 
-# Testing
-npm run test               # Tests unitarios
-npm run test:e2e           # Tests end-to-end
-npm run test:cov           # Cobertura de tests
 ```
 
 ## 🏗️ Estructura del Proyecto
@@ -214,41 +195,11 @@ curl -X GET http://localhost:3000/profile \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
-## 🐳 Docker (Opcional)
-
-Si prefieres usar Docker para todo el stack:
-
-```bash
-# Crear red Docker
-docker network create bootcamp-network
-
-# MongoDB
-docker run -d --name mongodb --network bootcamp-network -p 27017:27017 mongo:latest
-
-# Redis
-docker run -d --name redis --network bootcamp-network -p 6379:6379 redis:alpine
-
-# Aplicación (después de crear Dockerfile)
-docker build -t bootcamp-nodejs .
-docker run -d --name app --network bootcamp-network -p 3000:3000 bootcamp-nodejs
-```
-
-## 🤝 Contribución
-
-Este es un proyecto de bootcamp, pero si quieres contribuir:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
 ## 📝 Notas de Desarrollo
 
 - El token JWT tiene una expiración de 20 segundos (configurado para desarrollo)
 - El sistema de caché está configurado globalmente con Redis
 - Todos los módulos siguen las mejores prácticas de NestJS
-- Se incluye validación de datos con class-validator en todos los DTOs
 
 ## 📄 Licencia
 
